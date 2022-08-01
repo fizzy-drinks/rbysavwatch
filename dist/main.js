@@ -22,7 +22,7 @@ const destPath = path_1.default.resolve(process.cwd(), txtDest);
 const writeData = async () => {
     const buf = fs_1.default.readFileSync(filePath);
     const { pokedex, pokemon } = (0, _1.extractSaveData)(buf);
-    fs_1.default.writeFileSync(destPath, (0, _1.fullReport)(pokedex, pokemon));
+    fs_1.default.writeFileSync(destPath, (0, _1.fullReport)(pokedex));
     const img = await (0, _1.generatePartyImage)(pokemon);
     fs_1.default.writeFileSync(destPath + ".png", img.toBuffer());
 };
