@@ -18,4 +18,4 @@ generatePartyImage(pokemon).then((canvas) => {
   console.log("Generated image at test dir");
 });
 
-console.log(fullReport(pokedex, pokemon));
+console.log(fullReport(pokedex));

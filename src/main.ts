@@ -24,7 +24,7 @@ const writeData = async () => {
 
   const { pokedex, pokemon } = extractSaveData(buf);
 
-  fs.writeFileSync(destPath, fullReport(pokedex, pokemon));
+  fs.writeFileSync(destPath, fullReport(pokedex));
 
   const img = await generatePartyImage(pokemon);
   fs.writeFileSync(destPath + ".png", img.toBuffer());
