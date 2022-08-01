@@ -21,9 +21,11 @@ npm i -g rby-sav-to-txt-1.0.0.tgz
 Run `rbysavwatch` from anywhere, specifying the save file and the destination of the text file with game data:
 
 ```
-rbysavwatch pokemon-red.sav partyinfo.txt
+rbysavwatch pokemon-red.sav my-red-run
 ```
 
-Add the output file as a source to your favourite streaming software and use it.
+Two files will be output: a plaintext file `my-red-run` and a `my-red-run.png` displaying the party Pokémon and their levels.
+
+Add the output file as sources in your favourite streaming software and have fun!
 
 # TODO: outline development and testing
