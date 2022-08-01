@@ -1,3 +1,9 @@
+# RBY save watcher
+
+> Automatically update files to include in stream overlays with party and Pokédex info
+
+![image](https://user-images.githubusercontent.com/6524870/182236830-639f7265-4197-4b2f-9230-9ac0ce027904.png)
+
 # Installing
 
 Clone the repository, `cd` into its root directory and create a package:
