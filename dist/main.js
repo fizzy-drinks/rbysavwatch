@@ -19,10 +19,12 @@ if (!txtDest) {
 }
 const filePath = path_1.default.resolve(process.cwd(), fileName);
 const destPath = path_1.default.resolve(process.cwd(), txtDest);
-const writeData = () => {
+const writeData = async () => {
     const buf = fs_1.default.readFileSync(filePath);
     const { pokedex, pokemon } = (0, _1.extractSaveData)(buf);
     fs_1.default.writeFileSync(destPath, (0, _1.fullReport)(pokedex, pokemon));
+    const img = await (0, _1.generatePartyImage)(pokemon);
+    fs_1.default.writeFileSync(destPath + ".png", img.toBuffer());
 };
 fs_1.default.watchFile(filePath, writeData);
 writeData();

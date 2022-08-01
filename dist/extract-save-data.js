@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.extractSaveData = void 0;
-const pokemon_indices_1 = require("./pokemon-indices");
+const pokemon_index_map_1 = require("./pokemon-index-map");
 const extractPokemonData = (saveData) => {
     const PartyDataAddr = 0x2f2c;
     const PartyDataLength = 0x194;
@@ -11,7 +11,7 @@ const extractPokemonData = (saveData) => {
     const pokemonCount = partyDataArr.shift();
     console.log("Pokémon in party:", pokemonCount);
     const pokemonSpecies = partyDataArr.splice(0, 6);
-    console.log("Species:", pokemonSpecies.map((id) => pokemon_indices_1.pokemonIndices.find((mon) => mon[0] === id)?.[1]));
+    console.log("Species:", pokemonSpecies.map((id) => pokemon_index_map_1.pokemonIndexMap.find((mon) => mon[0] === id)?.[1]));
     partyDataArr.shift(); // throw away padding data
     const pokemonData = [];
     while (partyDataArr.length)
@@ -20,7 +20,9 @@ const extractPokemonData = (saveData) => {
     return pokemonData
         .map((bytes) => {
         const speciesId = bytes.shift() || 0;
-        const name = pokemon_indices_1.pokemonIndices.find(([id]) => id === speciesId)?.[1] || "none";
+        const [name, pokedexNumber] = pokemon_index_map_1.pokemonIndexMap
+            .find(([id]) => id === speciesId)
+            ?.slice(1) || ["none", 0];
         const currentHP = readAsInt16(bytes.splice(0, 2));
         const _level = bytes.shift() || 5;
         const _status = bytes.shift() || 0;
@@ -40,6 +42,7 @@ const extractPokemonData = (saveData) => {
         // const special = readAsInt16(bytes.splice(0, 2));
         return {
             speciesId,
+            pokedexNumber,
             name,
             currentHP,
             maxHP,
