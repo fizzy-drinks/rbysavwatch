@@ -10,8 +10,8 @@
     "test": "ts-node test test/save.sav",
     "build": "tsc",
     "cli": "node dist/main.js",
-    "prepack": "npm run build",
-    "preversion": "npm run build"
+    "prepack": "npm run build && git add dist",
+    "preversion": "npm run build && git add dist"
   },
   "keywords": [],
   "author": "",
