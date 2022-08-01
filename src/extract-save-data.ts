@@ -1,5 +1,5 @@
 import { Pokedex } from "./pokedex.type";
-import { pokemonIndices } from "./pokemon-indices";
+import { pokemonIndexMap } from "./pokemon-index-map";
 import { Pokemon } from "./pokemon.type";
 
 const extractPokemonData = (saveData: Buffer): Pokemon[] => {
@@ -20,7 +20,9 @@ const extractPokemonData = (saveData: Buffer): Pokemon[] => {
   const pokemonSpecies = partyDataArr.splice(0, 6);
   console.log(
     "Species:",
-    pokemonSpecies.map((id) => pokemonIndices.find((mon) => mon[0] === id)?.[1])
+    pokemonSpecies.map(
+      (id) => pokemonIndexMap.find((mon) => mon[0] === id)?.[1]
+    )
   );
 
   partyDataArr.shift(); // throw away padding data
@@ -34,8 +36,9 @@ const extractPokemonData = (saveData: Buffer): Pokemon[] => {
   return pokemonData
     .map((bytes) => {
       const speciesId = bytes.shift() || 0;
-      const name =
-        pokemonIndices.find(([id]) => id === speciesId)?.[1] || "none";
+      const [name, pokedexNumber] = (pokemonIndexMap
+        .find(([id]) => id === speciesId)
+        ?.slice(1) as [string, number]) || ["none", 0];
 
       const currentHP = readAsInt16(bytes.splice(0, 2));
       const _level = bytes.shift() || 5;
@@ -57,6 +60,7 @@ const extractPokemonData = (saveData: Buffer): Pokemon[] => {
 
       return {
         speciesId,
+        pokedexNumber,
         name,
         currentHP,
         maxHP,

@@ -1,4 +1,6 @@
-export const pokemonIndices: [number, string][] = [
+import { pokedex } from "./data/pokedex";
+
+const pokemonByIndex: [number, string][] = [
   [1, "Rhydon"],
   [2, "Kangaskhan"],
   [3, "Nidoran♂"],
@@ -190,3 +192,11 @@ export const pokemonIndices: [number, string][] = [
   [189, "Weepinbell"],
   [190, "Victreebel"],
 ];
+
+export const pokemonIndexMap: [number, string, number][] = pokemonByIndex.map(
+  ([id, qname]) => [
+    id,
+    qname,
+    pokedex.find(({ name }) => name.english === qname)?.id || 0,
+  ]
+);

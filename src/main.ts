@@ -2,7 +2,7 @@
 
 import path from "path";
 import fs from "fs";
-import { fullReport, extractSaveData } from ".";
+import { fullReport, extractSaveData, generatePartyImage } from ".";
 
 const fileName = process.argv[2];
 if (!fileName) {
@@ -19,12 +19,15 @@ if (!txtDest) {
 const filePath = path.resolve(process.cwd(), fileName);
 const destPath = path.resolve(process.cwd(), txtDest);
 
-const writeData = () => {
+const writeData = async () => {
   const buf = fs.readFileSync(filePath);
 
   const { pokedex, pokemon } = extractSaveData(buf);
 
   fs.writeFileSync(destPath, fullReport(pokedex, pokemon));
+
+  const img = await generatePartyImage(pokemon);
+  fs.writeFileSync(destPath + ".png", img.toBuffer());
 };
 
 fs.watchFile(filePath, writeData);
