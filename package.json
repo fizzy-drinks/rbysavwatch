@@ -1,6 +1,6 @@
 {
   "name": "rby-sav-to-txt",
-  "version": "1.",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/",
   "bin": {
