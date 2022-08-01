@@ -11,7 +11,7 @@ export const generatePartyImage = async (pokemon: Pokemon[]) => {
   const ctx = canvas.getContext("2d");
   ctx.imageSmoothingEnabled = false;
 
-  ctx.fillStyle = "#ffffff60";
+  ctx.fillStyle = "#ffffffc0";
   ctx.fillRect(0, 0, 360, 80);
 
   const pokemonUrls = pokemon.map((mon) => serebiiUrl(mon.pokedexNumber));
