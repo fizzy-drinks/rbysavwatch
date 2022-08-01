@@ -9,7 +9,7 @@ const generatePartyImage = async (pokemon) => {
     const canvas = (0, canvas_1.createCanvas)(360, 80);
     const ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = false;
-    ctx.fillStyle = "#ffffff60";
+    ctx.fillStyle = "#ffffffc0";
     ctx.fillRect(0, 0, 360, 80);
     const pokemonUrls = pokemon.map((mon) => serebiiUrl(mon.pokedexNumber));
     const images = await Promise.all(pokemonUrls.map(canvas_1.loadImage));
